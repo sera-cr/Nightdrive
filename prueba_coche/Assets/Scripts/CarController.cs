@@ -10,6 +10,10 @@ public class CarController : MonoBehaviour
     public float maxSteeringAngle; // maximum steer angle the wheel can have
     private Rigidbody rigidBody;
     public InputManager im;
+    public float acceleration;
+    public float brakeAcceleration;
+    public float velocity;
+    public float deceleration;
 
     // damper: how much does the wheel NOT bounce. With 100 damper, the wheel will bounce a lot.
     // spring: the force of the suspension spring. With 1000 spring, the spring won't have the force to recover or
@@ -58,6 +62,19 @@ public class CarController : MonoBehaviour
         rw.motorTorque = thurstTorque;
     }
 
+    private void Brake(WheelCollider lw, WheelCollider rw)
+    {
+        float brakeForce = rigidBody.mass * brakeAcceleration;
+        rigidBody.AddRelativeForce(-Vector3.forward * brakeForce);
+        lw.motorTorque = 0f;
+        rw.motorTorque = 0f;
+    }
+
+    private void Deceleration()
+    {
+        
+    }
+
     public void FixedUpdate()
     {
         foreach (AxleInfo axleInfo in axleInfos)
@@ -69,10 +86,19 @@ public class CarController : MonoBehaviour
             if (axleInfo.motor)
             {
                 Acceleration(axleInfo.leftWheel, axleInfo.rightWheel);
+                float force = rigidBody.mass * acceleration;
+                rigidBody.AddRelativeForce(0, 0, im.acceleration * force);
+            } else {
+
             }
             ApplyLocalPositionToVisuals(axleInfo.leftWheel);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
+            if (im.brake && velocity > 2f)
+            {
+                
+            }
         }
+        velocity = Mathf.Abs(rigidBody.velocity.z);
     }
 }
 
