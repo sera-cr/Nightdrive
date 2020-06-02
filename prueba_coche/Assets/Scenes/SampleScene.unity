@@ -491,12 +491,12 @@ PrefabInstance:
     - target: {fileID: 5258172562129499720, guid: 368cbfccd1c2aa163ad5b86d9be477e5,
         type: 3}
       propertyPath: acceleration
-      value: 3
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 5258172562129499720, guid: 368cbfccd1c2aa163ad5b86d9be477e5,
         type: 3}
       propertyPath: brakeAcceleration
-      value: 6
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 5258172562129499721, guid: 368cbfccd1c2aa163ad5b86d9be477e5,
         type: 3}
