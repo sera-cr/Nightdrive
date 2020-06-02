@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InputManager))]
 public class CarController : MonoBehaviour
 {
     public List<AxleInfo> axleInfos; // the information about each individual axle
     public float maxMotorTorque; // maximum torque the motor can apply to wheel
     public float maxSteeringAngle; // maximum steer angle the wheel can have
-    public Rigidbody rigidBody;
+    private Rigidbody rigidBody;
+    public InputManager im;
 
     // damper: how much does the wheel NOT bounce. With 100 damper, the wheel will bounce a lot.
     // spring: the force of the suspension spring. With 1000 spring, the spring won't have the force to recover or
@@ -37,22 +39,36 @@ public class CarController : MonoBehaviour
         visualWheel.transform.rotation = rotation;
     }
 
+    private void Steering(WheelCollider lw, WheelCollider rw)
+    {
+        // adjusting the steer to be between -1 and 1 plus the maximum steer angle
+        float steer = Mathf.Clamp(im.steer, -1, 1) * maxSteeringAngle;
+        lw.steerAngle = steer;
+        rw.steerAngle = steer;
+    }
+
+    private void Acceleration(WheelCollider lw, WheelCollider rw)
+    {
+        // adjusting the acceleration to be between -1 and 1
+        float accel = Mathf.Clamp(im.acceleration, -1, 1);
+        // thurstTorque is the force applied in the wheel at the force app point
+        // (lower point where the forces are applied)
+        float thurstTorque = accel * maxMotorTorque;
+        lw.motorTorque = thurstTorque;
+        rw.motorTorque = thurstTorque;
+    }
+
     public void FixedUpdate()
     {
-        float motor = maxMotorTorque * Input.GetAxis("Vertical");
-        float steering = maxSteeringAngle * Input.GetAxis("Horizontal");
-
         foreach (AxleInfo axleInfo in axleInfos)
         {
             if (axleInfo.steering)
             {
-                axleInfo.leftWheel.steerAngle = steering;
-                axleInfo.rightWheel.steerAngle = steering;
+                Steering(axleInfo.leftWheel, axleInfo.rightWheel);
             }
             if (axleInfo.motor)
             {
-                axleInfo.leftWheel.motorTorque = motor;
-                axleInfo.rightWheel.motorTorque = motor;
+                Acceleration(axleInfo.leftWheel, axleInfo.rightWheel);
             }
             ApplyLocalPositionToVisuals(axleInfo.leftWheel);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
