@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(InputManager))]
 public class CarController : MonoBehaviour
@@ -11,9 +12,10 @@ public class CarController : MonoBehaviour
     private Rigidbody rigidBody;
     public InputManager im;
     public float acceleration;
-    public float brakeAcceleration;
-    public float velocity;
-    public float deceleration;
+    public float brake;
+    public float speed;
+    public Text speedUI;
+    public Vector3 speedVector;
 
     // damper: how much does the wheel NOT bounce. With 100 damper, the wheel will bounce a lot.
     // spring: the force of the suspension spring. With 1000 spring, the spring won't have the force to recover or
@@ -64,15 +66,20 @@ public class CarController : MonoBehaviour
 
     private void Brake(WheelCollider lw, WheelCollider rw)
     {
-        float brakeForce = rigidBody.mass * brakeAcceleration;
-        rigidBody.AddRelativeForce(-Vector3.forward * brakeForce);
-        lw.motorTorque = 0f;
-        rw.motorTorque = 0f;
+        if (im.brake)
+        {
+            lw.brakeTorque = brake;
+            rw.brakeTorque = brake;
+        } else
+        {
+            lw.brakeTorque = 0;
+            rw.brakeTorque = 0;
+        }
     }
 
-    private void Deceleration()
+    private void UpdateText()
     {
-        
+        speedUI.text = speed.ToString("n0");
     }
 
     public void FixedUpdate()
@@ -88,17 +95,14 @@ public class CarController : MonoBehaviour
                 Acceleration(axleInfo.leftWheel, axleInfo.rightWheel);
                 float force = rigidBody.mass * acceleration;
                 rigidBody.AddRelativeForce(0, 0, im.acceleration * force);
-            } else {
-
             }
+            Brake(axleInfo.leftWheel, axleInfo.rightWheel);
             ApplyLocalPositionToVisuals(axleInfo.leftWheel);
             ApplyLocalPositionToVisuals(axleInfo.rightWheel);
-            if (im.brake && velocity > 2f)
-            {
-                
-            }
         }
-        velocity = Mathf.Abs(rigidBody.velocity.z);
+        speed = Mathf.Abs(rigidBody.velocity.magnitude) * 3.6f; // z axis direction speed in m/s plus conversion factor to km/h
+        UpdateText();
+        speedVector = rigidBody.velocity;
     }
 }
 
