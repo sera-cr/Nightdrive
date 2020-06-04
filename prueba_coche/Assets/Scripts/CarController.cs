@@ -15,7 +15,6 @@ public class CarController : MonoBehaviour
     public float brake;
     public float speed;
     public Text speedUI;
-    public Vector3 speedVector;
 
     // damper: how much does the wheel NOT bounce. With 100 damper, the wheel will bounce a lot.
     // spring: the force of the suspension spring. With 1000 spring, the spring won't have the force to recover or
@@ -102,7 +101,6 @@ public class CarController : MonoBehaviour
         }
         speed = Mathf.Abs(rigidBody.velocity.magnitude) * 3.6f; // z axis direction speed in m/s plus conversion factor to km/h
         UpdateText();
-        speedVector = rigidBody.velocity;
     }
 }
 
