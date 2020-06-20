@@ -38,7 +38,7 @@ public class CarController : MonoBehaviour
         Vector3 position;
         Quaternion rotation;
         collider.GetWorldPose(out position, out rotation);
-        rotation *= Quaternion.Euler(0, 0, -90); // adjusting wheels to stay vertical
+        ///rotation *= Quaternion.Euler(0, 0, -90); // adjusting wheels to stay vertical
 
         visualWheel.transform.position = position;
         visualWheel.transform.rotation = rotation;
