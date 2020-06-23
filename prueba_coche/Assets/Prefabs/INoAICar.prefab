@@ -1289,14 +1289,24 @@ MonoBehaviour:
     steering: 1
   - leftWheel: {fileID: 4927807899309796035}
     rightWheel: {fileID: 6396375355680118822}
-    motor: 0
+    motor: 1
     steering: 0
   path: {fileID: 0}
   currentObjective: 0
-  maxMotorTorque: 0
-  maxSteeringAngle: 0
   positionObjective: {x: 0, y: 0, z: 0}
   distance: 0
+  maxMotorTorque: 700
+  mediumMotorTorque: 500
+  minMotorTorque: 350
+  maxSteeringAngle: 25
+  maxBrakeTorque: 1000
+  mediumBrakeTorque: 800
+  minBrakeTorque: 400
+  isBraking: 0
+  sensorsLength: 6
+  brakingLength: 10
+  isAvoiding: 0
+  speedUI: {fileID: 0}
 --- !u!1 &2557121306840889808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,13 +1680,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4404603047395526399}
-  m_LocalRotation: {x: 0.2164396, y: -0, z: -0, w: 0.97629607}
-  m_LocalPosition: {x: 0, y: 3, z: -7}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 0, y: 2, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2519201530860756589}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!20 &880335821522456900
 Camera:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public Button machineLearningButton;
     public Button resetButton;
     public Button dayNightButton;
+    public Button enablePathButton;
     [Header("Cars and Agent")]
     public GameObject playerCar;
     public GameObject navMeshCar;
@@ -34,6 +35,12 @@ public class GameController : MonoBehaviour
     private bool nightDay; // true = night, false = day
     private Color dayLight;
     private Color nightLight;
+    [Header("Path")]
+    public GameObject path;
+    public Transform[] objectives;
+    private bool enablePath;
+    private string enabledPathText;
+    private string disabledPathText;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +55,14 @@ public class GameController : MonoBehaviour
         streetLights.SetActive(true);
         dayLight = new Color(250f/255f, 244f/255f, 214f/255f, 255f/255f);
         nightLight = new Color(0, 0, 0, 0);
+        enablePath = false;
+        enabledPathText = "Disable Path";
+        disabledPathText = "Enable Path";
+        objectives = path.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < objectives.Length; i++)
+        {
+            objectives[i].GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 
     public void PlayerButtonOnClick()
@@ -106,4 +121,26 @@ public class GameController : MonoBehaviour
             nightDay = true;
         }
     }
+
+    public void EnablePathOnClick()
+    {
+        if (enablePath)
+        {
+            for (int i = 1; i < objectives.Length; i++)
+            {
+                objectives[i].GetComponent<MeshRenderer>().enabled = false;
+            }
+            enablePathButton.GetComponentInChildren<Text>().text = disabledPathText;
+            enablePath = false;
+        } else
+        {
+            for (int i = 1; i < objectives.Length; i++)
+            {
+                objectives[i].GetComponent<MeshRenderer>().enabled = true;
+            }
+            enablePathButton.GetComponentInChildren<Text>().text = enabledPathText;
+            enablePath = true;
+        }
+    }
+
 }
