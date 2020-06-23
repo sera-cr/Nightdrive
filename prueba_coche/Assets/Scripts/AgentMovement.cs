@@ -7,14 +7,16 @@ public class AgentMovement : MonoBehaviour
 {
     public NavMeshAgent agent;
     public int currentObjetive;
-    public GameObject[] objetives;
+    public GameObject path;
+    private Transform[] objectives;
 
     // Start is called before the first frame update
     void Start()
     {
+        objectives = path.GetComponentsInChildren<Transform>();
         if (agent == null)
             agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(objetives[0].transform.position);
+        agent.SetDestination(objectives[1].position);
     }
 
     // Update is called once per frame
@@ -23,11 +25,11 @@ public class AgentMovement : MonoBehaviour
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             currentObjetive++;
-            if (currentObjetive >= objetives.Length)
+            if (currentObjetive >= objectives.Length)
             {
-                currentObjetive = 0;
+                currentObjetive = 1;
             }
-            agent.SetDestination(objetives[currentObjetive].transform.position);
+            agent.SetDestination(objectives[currentObjetive].position);
         }
     }
 }

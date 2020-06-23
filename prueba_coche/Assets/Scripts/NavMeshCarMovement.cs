@@ -61,7 +61,8 @@ public class NavMeshCarMovement : MonoBehaviour
         if (speed >= 40f)
         {
             torque = minMotorTorque;
-        } else
+        }
+        else
         {
             torque = maxMotorTorque;
         }

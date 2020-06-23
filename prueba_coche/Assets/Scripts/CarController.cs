@@ -26,7 +26,7 @@ public class CarController : MonoBehaviour
         rigidBody.centerOfMass = new Vector3(0, -0.4f, 0);
     }
 
-    public void ApplyLocalPositionToVisuals(WheelCollider collider)
+    private void ApplyLocalPositionToVisuals(WheelCollider collider)
     {
         if (collider.transform.childCount == 0) // collider without visuals
         {
