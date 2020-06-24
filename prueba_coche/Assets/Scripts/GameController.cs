@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
@@ -18,6 +19,8 @@ public class GameController : MonoBehaviour
     public GameObject navMeshCar;
     public GameObject navMeshAgent;
     public GameObject noAICar;
+    public GameObject regressionCar;
+    public GameObject machineLearningCar;
     [Header("Cameras")]
     public GameObject cenitalCamera;
     [Header("Lighting")]
@@ -26,6 +29,8 @@ public class GameController : MonoBehaviour
     public GameObject playerLights;
     public GameObject navMeshLights;
     public GameObject noAILights;
+    public GameObject regressionLights;
+    public GameObject machineLearningLights;
     [Header("Text")]
     public Text kmhText;
     public Text speedText;
@@ -49,6 +54,8 @@ public class GameController : MonoBehaviour
         navMeshCar.SetActive(false);
         navMeshAgent.SetActive(false);
         noAICar.SetActive(false);
+        regressionCar.SetActive(false);
+        machineLearningCar.SetActive(false);
         kmhText.enabled = false;
         speedText.enabled = false;
         nightDay = true;
@@ -71,6 +78,8 @@ public class GameController : MonoBehaviour
         navMeshCar.SetActive(false);
         navMeshAgent.SetActive(false);
         noAICar.SetActive(false);
+        regressionCar.SetActive(false);
+        machineLearningCar.SetActive(false);
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
@@ -81,8 +90,10 @@ public class GameController : MonoBehaviour
         playerCar.SetActive(false);
         navMeshCar.SetActive(true);
         navMeshAgent.SetActive(true);
-        navMeshAgent.GetComponent<MeshRenderer>().enabled = true;
+        navMeshAgent.GetComponent<MeshRenderer>().enabled = false;
         noAICar.SetActive(false);
+        regressionCar.SetActive(false);
+        machineLearningCar.SetActive(false);
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
@@ -94,6 +105,34 @@ public class GameController : MonoBehaviour
         navMeshCar.SetActive(false);
         navMeshAgent.SetActive(false);
         noAICar.SetActive(true);
+        regressionCar.SetActive(false);
+        machineLearningCar.SetActive(false);
+        kmhText.enabled = true;
+        speedText.enabled = true;
+        cenitalCamera.SetActive(false);
+    }
+
+    public void RegressionButtonOnClick()
+    {
+        playerCar.SetActive(false);
+        navMeshCar.SetActive(false);
+        navMeshAgent.SetActive(false);
+        noAICar.SetActive(false);
+        regressionCar.SetActive(true);
+        machineLearningCar.SetActive(false);
+        kmhText.enabled = true;
+        speedText.enabled = true;
+        cenitalCamera.SetActive(false);
+    }
+
+    public void MachineLearningOnClick()
+    {
+        playerCar.SetActive(false);
+        navMeshCar.SetActive(false);
+        navMeshAgent.SetActive(false);
+        noAICar.SetActive(false);
+        regressionCar.SetActive(false);
+        machineLearningCar.SetActive(true);
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
@@ -108,6 +147,8 @@ public class GameController : MonoBehaviour
             playerLights.SetActive(false);
             navMeshLights.SetActive(false);
             noAILights.SetActive(false);
+            regressionLights.SetActive(false);
+            machineLearningLights.SetActive(false);
             RenderSettings.skybox = day;
             nightDay = false;
         } else
@@ -117,6 +158,8 @@ public class GameController : MonoBehaviour
             playerLights.SetActive(true);
             navMeshLights.SetActive(true);
             noAILights.SetActive(true);
+            regressionLights.SetActive(true);
+            machineLearningLights.SetActive(true);
             RenderSettings.skybox = night;
             nightDay = true;
         }
@@ -143,4 +186,8 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void RestartOnClick()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
 }
