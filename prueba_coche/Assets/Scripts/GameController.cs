@@ -81,7 +81,7 @@ public class GameController : MonoBehaviour
         playerCar.SetActive(false);
         navMeshCar.SetActive(true);
         navMeshAgent.SetActive(true);
-        navMeshAgent.GetComponent<MeshRenderer>().enabled = false;
+        navMeshAgent.GetComponent<MeshRenderer>().enabled = true;
         noAICar.SetActive(false);
         kmhText.enabled = true;
         speedText.enabled = true;

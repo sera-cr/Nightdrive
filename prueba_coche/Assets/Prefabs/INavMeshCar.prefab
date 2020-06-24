@@ -604,7 +604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3890731482047227788}
   - component: {fileID: 4708041101231339705}
-  - component: {fileID: 3047144546032897491}
+  - component: {fileID: 273383042057951949}
   m_Layer: 0
   m_Name: INavMeshCar
   m_TagString: Untagged
@@ -645,7 +645,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3047144546032897491
+--- !u!114 &273383042057951949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -666,14 +666,25 @@ MonoBehaviour:
     rightWheel: {fileID: 5750211229908574663}
     motor: 1
     steering: 0
-  minMotorTorque: 200
-  maxMotorTorque: 25
-  maxSteeringAngle: 30
-  acceleration: 0
-  distance: 0
-  agent: {fileID: 0}
-  starting: 0
   speed: 0
+  agent: {fileID: 0}
+  lastAgentPosition: {x: 0, y: 0, z: 0}
+  currentObjective: {x: 0, y: 0, z: 0}
+  distance: 0
+  numberOfObjectives: 0
+  isStarting: 0
+  maxMotorTorque: 900
+  mediumMotorTorque: 450
+  minMotorTorque: 150
+  maxSteeringAngle: 25
+  maxBrakeTorque: 1000
+  mediumBrakeTorque: 800
+  minBrakeTorque: 400
+  isBraking: 0
+  sensorsLength: 6
+  brakingLength: 10
+  isAvoiding: 0
+  speedUI: {fileID: 0}
 --- !u!1 &3890731482047396812
 GameObject:
   m_ObjectHideFlags: 0

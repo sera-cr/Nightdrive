@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8101006518007674744}
   - component: {fileID: 2297780168933236702}
   m_Layer: 0
-  m_Name: navmesh_agent
+  m_Name: Navmesh_agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,13 +105,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 10
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.5
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
@@ -131,10 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
   currentObjetive: 0
-  objetives:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  path: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
+  car: {fileID: 0}

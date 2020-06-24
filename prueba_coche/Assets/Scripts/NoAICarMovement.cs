@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class NoAICarMovement : MonoBehaviour
 {
     public List<AxleInfo> axleInfos; // the information about each individual axle
+    private Rigidbody rigidBody;
+    public float speed;
+    [Header("Objective")]
     public GameObject path;
     private Transform[] objectives;
-    private Rigidbody rigidBody;
-    private float speed;
-    [Header("Objective")]
     public int currentObjective;
     public Vector3 positionObjective;
     public float distance;
@@ -115,7 +115,7 @@ public class NoAICarMovement : MonoBehaviour
     private void CheckDistance()
     {
         distance = Vector3.Distance(transform.position, objectives[currentObjective].position);
-        if (Vector3.Distance(transform.position, objectives[currentObjective].position) < 3f)
+        if (distance < 3f)
         {
             currentObjective++;
             if (currentObjective >= objectives.Length)
