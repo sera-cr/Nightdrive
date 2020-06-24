@@ -1845,6 +1845,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6061042618917674743}
   - component: {fileID: 2357022951374111170}
+  - component: {fileID: 8111044939870439034}
+  - component: {fileID: 5581314519437696216}
   m_Layer: 0
   m_Name: RegressionCar
   m_TagString: Untagged
@@ -1885,6 +1887,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8111044939870439034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061042618917241559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae7e4bbc6b29024ebddf5e39c3f9872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axleInfos:
+  - leftWheel: {fileID: 5009101537106102168}
+    rightWheel: {fileID: 8673759862406857130}
+    motor: 0
+    steering: 1
+  - leftWheel: {fileID: 3641214704123996761}
+    rightWheel: {fileID: 3327978880712857788}
+    motor: 1
+    steering: 0
+  speed: 0
+  path: {fileID: 0}
+  currentObjective: 0
+  point: {fileID: 0}
+  positionObjective: {x: 0, y: 0, z: 0}
+  distance: 0
+  maxValueMotorTorque: 900
+  actualMotorTorque: 0
+  stepMotorTorque: 10
+  fixedSteer: 25
+  speedUI: {fileID: 0}
+--- !u!65 &5581314519437696216
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061042618917241559}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.4238472, y: 1.3541772, z: 4.4503393}
+  m_Center: {x: -0.006822586, y: 0.78345066, z: -0.10067415}
 --- !u!1 &6134988357928996701
 GameObject:
   m_ObjectHideFlags: 0

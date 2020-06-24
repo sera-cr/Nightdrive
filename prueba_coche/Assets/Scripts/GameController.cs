@@ -54,7 +54,8 @@ public class GameController : MonoBehaviour
         navMeshCar.SetActive(false);
         navMeshAgent.SetActive(false);
         noAICar.SetActive(false);
-        regressionCar.SetActive(false);
+        //regressionCar.SetActive(false);
+        cenitalCamera.SetActive(false);
         machineLearningCar.SetActive(false);
         kmhText.enabled = false;
         speedText.enabled = false;

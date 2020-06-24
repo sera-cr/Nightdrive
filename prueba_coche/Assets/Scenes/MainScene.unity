@@ -15782,6 +15782,8 @@ MonoBehaviour:
   playerLights: {fileID: 1583894166}
   navMeshLights: {fileID: 442253207}
   noAILights: {fileID: 1754376062}
+  regressionLights: {fileID: 0}
+  machineLearningLights: {fileID: 0}
   kmhText: {fileID: 2141151708}
   speedText: {fileID: 1724208120}
   night: {fileID: 2100000, guid: 97637a2a763b7f24b8da4e139e4144ca, type: 2}
@@ -44329,6 +44331,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4663015483754340691, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6061042618917241559, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
       propertyPath: m_Name
@@ -44342,12 +44349,12 @@ PrefabInstance:
     - target: {fileID: 6061042618917674743, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.32
+      value: 21.33
       objectReference: {fileID: 0}
     - target: {fileID: 6061042618917674743, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 129.24
+      value: 129.57
       objectReference: {fileID: 0}
     - target: {fileID: 6061042618917674743, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
@@ -44388,6 +44395,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: point
+      value: 
+      objectReference: {fileID: 1262477899}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: speedUI
+      value: 
+      objectReference: {fileID: 1724208120}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: stepTorque
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: stepSteer
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: fixedMotorTorque
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: stepMotorTorque
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: path
+      value: 
+      objectReference: {fileID: 1236046220}
+    - target: {fileID: 8948822295359088064, guid: c4f941f35827d6943afa8eaa50d810c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4f941f35827d6943afa8eaa50d810c2, type: 3}

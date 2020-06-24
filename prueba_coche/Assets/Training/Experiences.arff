@@ -1,0 +1,4 @@
+@relation ObtainTorque
+@attribute  torque  numeric
+@attribute  distance  numeric
+@data 

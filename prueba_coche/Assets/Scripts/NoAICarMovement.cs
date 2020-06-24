@@ -68,6 +68,7 @@ public class NoAICarMovement : MonoBehaviour
         visualWheel.transform.position = position;
         visualWheel.transform.rotation = rotation;
     }
+
     private void Steering(WheelCollider lw, WheelCollider rw)
     {
         float steer;
@@ -264,7 +265,6 @@ public class NoAICarMovement : MonoBehaviour
         {
             if (axleInfo.steering)
             {
-                Sensors();
                 Steering(axleInfo.leftWheel, axleInfo.rightWheel);
             }
             if (axleInfo.motor)
@@ -278,6 +278,5 @@ public class NoAICarMovement : MonoBehaviour
         CheckDistance();
         UpdateText();
         speed = Mathf.Abs(rigidBody.velocity.magnitude) * 3.6f; // z axis direction speed in m/s plus conversion factor to km/h
-
     }
 }
