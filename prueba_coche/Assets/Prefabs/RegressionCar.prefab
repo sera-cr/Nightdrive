@@ -1913,7 +1913,7 @@ MonoBehaviour:
   currentObjective: 0
   positionObjective: {x: 0, y: 0, z: 0}
   distance: 0
-  maxValueMotorTorque: 700
+  maxValueMotorTorque: 500
   maxBrakeTorque: 1000
   mediumBrakeTorque: 800
   minBrakeTorque: 400
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   brakingLength: 10
   isAvoiding: 0
   actualMotorTorque: 0
-  stepMotorTorque: 20
+  stepMotorTorque: 30
   fixedSteer: 25
   iteration: 0
   time: 0

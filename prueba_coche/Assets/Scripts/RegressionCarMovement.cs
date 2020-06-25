@@ -56,7 +56,7 @@ public class RegressionCarMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 20f; // to speed up the game
+        Time.timeScale = 25f; // to speed up the game
         rigidBody = gameObject.GetComponent<Rigidbody>();
         rigidBody.centerOfMass = new Vector3(0, -0.4f, 0);
         currentObjective = 1;
@@ -88,7 +88,7 @@ public class RegressionCarMovement : MonoBehaviour
             for (iteration = 1; iteration < objectives.Length; iteration++)
             {
                 currentObjective = 1;
-                for (float torque = 300; torque <= maxValueMotorTorque; torque = torque + stepMotorTorque) // planning training loop
+                for (float torque = 340; torque <= maxValueMotorTorque; torque = torque + stepMotorTorque) // planning training loop
                 {
                     transform.position = startingPosition;
                     transform.rotation = startingRotation;
@@ -333,7 +333,7 @@ public class RegressionCarMovement : MonoBehaviour
         if (Mathf.Floor(speed) > 0)
         {
             time = 0f;
-        } else if (Mathf.Floor(speed) == 0 && time >= 5f)
+        } else if (Mathf.Floor(speed) <= 2.2f && time >= 5f)
         {
             currentObjective = 1;
             collided = true;
