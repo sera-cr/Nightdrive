@@ -43,9 +43,12 @@ public class GameController : MonoBehaviour
     private Color dayLight;
     private Color nightLight;
     [Header("Path")]
-    public GameObject path;
-    public Transform[] objectives;
+    public GameObject path1;
+    public GameObject path2;
+    public Transform[] objectives1;
+    public Transform[] objectives2;
     private bool enablePath;
+    private bool currentPath; // true = path1, false = path2
     private string enabledPathText;
     private string disabledPathText;
 
@@ -69,10 +72,15 @@ public class GameController : MonoBehaviour
         enablePath = false;
         enabledPathText = "Disable Path";
         disabledPathText = "Enable Path";
-        objectives = path.GetComponentsInChildren<Transform>();
-        for (int i = 1; i < objectives.Length; i++)
+        objectives1 = path1.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < objectives1.Length; i++)
         {
-            objectives[i].GetComponent<MeshRenderer>().enabled = false;
+            objectives1[i].GetComponent<MeshRenderer>().enabled = false;
+        }
+        objectives2 = path2.GetComponentsInChildren<Transform>();
+        for (int i = 1; i < objectives2.Length; i++)
+        {
+            objectives2[i].GetComponent<MeshRenderer>().enabled = false;
         }
         gameSpeedSlider.minValue = 1f;
         gameSpeedSlider.maxValue = 30f;
@@ -89,6 +97,11 @@ public class GameController : MonoBehaviour
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        currentPath = true;
     }
 
     public void NavMeshButtonOnClick()
@@ -103,6 +116,11 @@ public class GameController : MonoBehaviour
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        currentPath = true;
     }
 
     public void NoAIButtonOnClick()
@@ -116,6 +134,11 @@ public class GameController : MonoBehaviour
         kmhText.enabled = true;
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        currentPath = true;
     }
 
     public void RegressionTrainingButtonOnClick()
@@ -131,6 +154,11 @@ public class GameController : MonoBehaviour
         cenitalCamera.SetActive(false);
         regressionCarObject.STATE = "No Knowledge";
         regressionCarObject.StartTraining();
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        currentPath = false;   
     }
 
     public void RegressionRunButtonOnClick()
@@ -145,6 +173,11 @@ public class GameController : MonoBehaviour
         speedText.enabled = true;
         cenitalCamera.SetActive(false);
         regressionCarObject.STATE = "With Knowledge";
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        currentPath = false;
     }
 
     public void MachineLearningOnClick()
@@ -157,6 +190,11 @@ public class GameController : MonoBehaviour
         machineLearningCar.SetActive(true);
         kmhText.enabled = true;
         speedText.enabled = true;
+        if (enablePath)
+        {
+            EnablePathOnClick();
+        }
+        enablePath = true;
         cenitalCamera.SetActive(false);
     }
 
@@ -189,6 +227,14 @@ public class GameController : MonoBehaviour
 
     public void EnablePathOnClick()
     {
+        Transform[] objectives;
+        if (currentPath)
+        {
+            objectives = objectives1;
+        } else
+        {
+            objectives = objectives2;
+        }
         if (enablePath)
         {
             for (int i = 1; i < objectives.Length; i++)

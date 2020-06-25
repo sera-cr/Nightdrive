@@ -18392,8 +18392,10 @@ MonoBehaviour:
   speedText: {fileID: 1724208120}
   night: {fileID: 2100000, guid: 97637a2a763b7f24b8da4e139e4144ca, type: 2}
   day: {fileID: 2100000, guid: 0b846be1b116429409a7669cacf2a62e, type: 2}
-  path: {fileID: 1236046220}
-  objectives: []
+  path1: {fileID: 1236046220}
+  path2: {fileID: 358280300}
+  objectives1: []
+  objectives2: []
 --- !u!4 &870403380
 Transform:
   m_ObjectHideFlags: 0
@@ -27344,7 +27346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1236046221
 Transform:
   m_ObjectHideFlags: 0
