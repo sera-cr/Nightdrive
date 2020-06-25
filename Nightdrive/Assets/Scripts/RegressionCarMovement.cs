@@ -48,6 +48,7 @@ public class RegressionCarMovement : MonoBehaviour
     private bool reachedPoint; // if the car has reached the node it is looking for
     private M5P predictMotorTorque; // regression algorithm  which generates a regression tree
     private Instances trainingCases;
+    private Instances runningCases;
     public float time; // time the car can stay stopped
     public string STATE = "No Knowledge"; // state of the algorithm
     [Header("User Interface")]
@@ -58,8 +59,8 @@ public class RegressionCarMovement : MonoBehaviour
     {
         rigidBody = gameObject.GetComponent<Rigidbody>();
         rigidBody.centerOfMass = new Vector3(0, -0.4f, 0);
-        currentObjective = 1;
         objectives = path.GetComponentsInChildren<Transform>();
+        currentObjective = objectives.Length-1;
         positionObjective = objectives[currentObjective].position;
         isBraking = false;
         heightSensorPosition = 0.35f;
@@ -72,6 +73,7 @@ public class RegressionCarMovement : MonoBehaviour
         startingRotation = transform.rotation;
         canMove = false;
         reachedPoint = false;
+        runningCases = new Instances(new FileReader("Assets/Training/FinalExperiences.arff"));
         /*if (STATE == "No Knowledge")
             StartCoroutine("Training"); // training starts*/
         /**
@@ -94,10 +96,10 @@ public class RegressionCarMovement : MonoBehaviour
 
         if (trainingCases.numInstances() < 30)
         {
-            for (iteration = 1; iteration < objectives.Length; iteration++)
+            for (iteration = objectives.Length-1; iteration > 0; iteration--)
             {
-                currentObjective = 1;
-                for (float torque = 340; torque <= maxValueMotorTorque; torque = torque + stepMotorTorque) // planning training loop
+                currentObjective = objectives.Length-1;
+                for (float torque = 300; torque <= maxValueMotorTorque; torque = torque + stepMotorTorque) // planning training loop
                 {
                     transform.position = startingPosition;
                     transform.rotation = startingRotation;
@@ -111,7 +113,7 @@ public class RegressionCarMovement : MonoBehaviour
                     // wait untill the car reaches the point and has not collided)
                     Instance caseToLearn = new Instance(trainingCases.numAttributes());
                     caseToLearn.setDataset(trainingCases);
-                    caseToLearn.setValue(0, iteration);
+                    caseToLearn.setValue(0, currentObjective);
                     caseToLearn.setValue(1, torque);
                     caseToLearn.setValue(2, distance);
                     trainingCases.add(caseToLearn);
@@ -188,16 +190,29 @@ public class RegressionCarMovement : MonoBehaviour
         rw.motorTorque = torque;
     }
 
+    private void CheckDistanceTraining()
+    {
+        distance = Vector3.Distance(transform.position, objectives[currentObjective].position);
+        if (distance < 3f)
+        {
+            currentObjective--;
+            if (currentObjective < iteration)
+            {
+                reachedPoint = true;
+                currentObjective = objectives.Length-1;
+            }
+        }
+    }
+
     private void CheckDistance()
     {
         distance = Vector3.Distance(transform.position, objectives[currentObjective].position);
         if (distance < 3f)
         {
-            currentObjective++;
-            if (currentObjective > iteration)
+            currentObjective--;
+            if (currentObjective < 1)
             {
-                reachedPoint = true;
-                currentObjective = 1;
+                currentObjective = objectives.Length-1;
             }
         }
     }
@@ -372,18 +387,20 @@ public class RegressionCarMovement : MonoBehaviour
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
-            CheckDistance();
+            CheckDistanceTraining();
             UpdateText();
             speed = Mathf.Abs(rigidBody.velocity.magnitude) * 3.6f; // z axis direction speed in m/s plus conversion factor to km/h
             CheckTimePassed();
         }
-        /*if ((STATE == "With Knowledge") && (distance > 0))
+        if ((STATE == "With Knowledge") && (distance > 0))
         {
-            distance = Vector3.Distance(transform.position, objective);
+            Sensors();
             positionObjective = objectives[currentObjective].position;
-            Instance testCase = new Instance(trainingCases.numAttributes());
+            distance = Vector3.Distance(transform.position, positionObjective);
+            Instance testCase = new Instance(runningCases.numAttributes());
             testCase.setDataset(trainingCases);
-            testCase.setValue(1, distance);
+            testCase.setValue(0, currentObjective);
+            testCase.setValue(2, distance);
 
             bestMotorTorque = (float)predictMotorTorque.classifyInstance(testCase);
             actualMotorTorque = bestMotorTorque;
@@ -397,13 +414,14 @@ public class RegressionCarMovement : MonoBehaviour
                 {
                     Acceleration(axleInfo.leftWheel, axleInfo.rightWheel);
                 }
+                Braking(axleInfo.leftWheel, axleInfo.rightWheel);
                 ApplyLocalPositionToVisuals(axleInfo.leftWheel);
                 ApplyLocalPositionToVisuals(axleInfo.rightWheel);
             }
-            //CheckDistance();
+            CheckDistance();
             UpdateText();
             speed = Mathf.Abs(rigidBody.velocity.magnitude) * 3.6f; // z axis direction speed in m/s plus conversion factor to km/h
-        }*/
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\INavMeshCarMovement.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\MachineLearningCarMovement.cs" />
     <Compile Include="Assets\Scripts\NoAICarMovement.cs" />
     <Compile Include="Assets\Scripts\RegressionCarMovement.cs" />
     <Reference Include="UnityEngine">
