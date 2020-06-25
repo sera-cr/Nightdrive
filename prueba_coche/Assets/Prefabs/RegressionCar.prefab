@@ -1911,13 +1911,21 @@ MonoBehaviour:
   speed: 0
   path: {fileID: 0}
   currentObjective: 0
-  point: {fileID: 0}
   positionObjective: {x: 0, y: 0, z: 0}
   distance: 0
-  maxValueMotorTorque: 900
+  maxValueMotorTorque: 700
+  maxBrakeTorque: 1000
+  mediumBrakeTorque: 800
+  minBrakeTorque: 400
+  isBraking: 0
+  sensorsLength: 6
+  brakingLength: 10
+  isAvoiding: 0
   actualMotorTorque: 0
-  stepMotorTorque: 10
+  stepMotorTorque: 20
   fixedSteer: 25
+  iteration: 0
+  time: 0
   speedUI: {fileID: 0}
 --- !u!65 &5581314519437696216
 BoxCollider:

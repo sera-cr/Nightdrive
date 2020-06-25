@@ -44424,7 +44424,7 @@ PrefabInstance:
     - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
       propertyPath: stepMotorTorque
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8111044939870439034, guid: c4f941f35827d6943afa8eaa50d810c2,
         type: 3}
